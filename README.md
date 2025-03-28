@@ -6,11 +6,13 @@ se tiene un conjunto de ítems N = {1, . . . , n}, donde cada ítem i ∈ N tien
 asociado pi > 0 y un peso wi > 0. Se dispone de una mochila con una capacidad máxima C, y
 el objetivo es seleccionar un subconjunto de ítems que maximice el beneficio total sin superar
 la capacidad C.
+
 Además de esta restricción, se define un grafo de conflictos G = (N, E) sobre el conjunto de
 ítems. Cada arista (i, j) ∈ E representa un conflicto entre los ítems i y j, lo que significa que
 no pueden seleccionarse simultáneamente. Esta generalización modela diversos escenarios
 del mundo real en los que los ítems están limitados no solo por el peso, sino también por
 incompatibilidades mutuas.
+
 Debido a su mayor complejidad, el KP01wCG requiere enfoques de solución especializados
 que van más allá de los utilizados para el problema clásico KP01. Algoritmos exactos de
 última generación para resolver este problema han sido propuestos recientemente en [1],
@@ -32,7 +34,7 @@ ganancia asociada al ítem j.
 indicando que los ítems u y v están en conflicto y no pueden ser seleccionados simultáneamente
 en la solución.
 
-Ejemplo 
+Ejemplo:
 ```
 5
 50
