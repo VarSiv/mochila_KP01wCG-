@@ -6,9 +6,11 @@
 #include "Graph.h"
 #include <iostream>
 #include <fstream> 
+#include <sstream>
 using std::ifstream;
+using std::string;
+using std::vector;
 
-using namespace std;
 
 class KP01withCGInstance {
 private:
@@ -18,28 +20,11 @@ private:
     vector<int> _weights;
     vector<int> _profits;
     Graph _conflicts;
-//Funcion auxiliar para separar los numeros de texto a un vector de int 
-    vector<int> separar_palabras( const string & texto){
-        string palabra = "";												
-        vector<int> v;													
-        for (int i=0; i<texto.size(); i++){									
-            if(texto[i]!=' '){												
-                palabra.push_back(texto[i]);								
-            }
-            else{
-                v.push_back(stoi(palabra));										
-                palabra="";												
-            }
-        }
-        v.push_back(stoi(palabra));											
-        return v;										
-    }
 
     
 
 public:
-    KP01withCGInstance(unsigned int n, int cap);
-    void setInstance(string filename);
+    KP01withCGInstance(string filename);
     void setWeight(int index, int weight);
     void setProfit(int index, int profit);
     int getWeight(int index) const;
@@ -52,4 +37,4 @@ public:
 
 };
 
-#endif //KP01WITHCGINSTANCE_H
+#endif // KP01WITHCGINSTANCE_H
