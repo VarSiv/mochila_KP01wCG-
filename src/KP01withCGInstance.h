@@ -17,8 +17,8 @@ private:
     int _maxCapacity;
     vector<int> _weights;
     vector<int> _profits;
-    Graph _conflicts(int);
-//Funcion auxiliar 
+    Graph _conflicts;
+//Funcion auxiliar para separar los numeros de texto a un vector de int 
     vector<int> separar_palabras( const string & texto){
         string palabra = "";												
         vector<int> v;													
