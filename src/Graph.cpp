@@ -42,9 +42,3 @@ void Graph::printGraph(){
     }
 }
 
-int main(){
-    Graph g(3);
-    g.addEdge(1, 2);
-    g.printGraph();
-
-}
