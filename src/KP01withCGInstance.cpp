@@ -1,6 +1,10 @@
 #include "KP01withCGInstance.h"
 
-KP01withCGInstance::KP01withCGInstance(string filename)
+KP01withCGInstance::KP01withCGInstance(unsigned int n, int cap): _num_items(n), _maxCapacity(n), _conflicts(Graph(n)) {
+    _weights=vector<int>(n);
+    _profits=vector<int>(n);
+}
+void KP01withCGInstance::setInstance(string filename) 
     : _conflicts(0) {
     _filename = filename;
     _weights = {};
@@ -63,16 +67,13 @@ KP01withCGInstance::KP01withCGInstance(string filename)
     
 }
 
-void KP01withCGInstance::setWeight(int index, int weight) {
-}
-
-void KP01withCGInstance::setProfit(int index, int profit) {
-}
 
 int KP01withCGInstance::getWeight(int index) const {
+    return _weights[index];
 }
 
 int KP01withCGInstance::getProfit(int index) const {
+    return _profits[index];
 }
 
 int KP01withCGInstance::getNumItems() const {
@@ -80,14 +81,24 @@ int KP01withCGInstance::getNumItems() const {
 }
 
 int KP01withCGInstance::getCapacity() const {
+    return _maxCapacity;
 }
 
 void KP01withCGInstance::addConflict(int item1, int item2) {
+    _conflicts.addEdge(item1, item2);
+     
 }
 
+
 void KP01withCGInstance::removeConflict(int item1, int item2) {
+    _conflicts.removeEdge(item1, item2);
+}
+vector<int> KP01withCGInstance::conflicts(int item1){
+    
 }
 
 int main() {
-    KP01withCGInstance instance("instances/test_instance.in");
+    KP01withCGInstance instance(0,0);
+    instance.setInstance("instances/test_instance.in");
+    return 0;
 }

@@ -24,7 +24,8 @@ private:
     
 
 public:
-    KP01withCGInstance(string filename);
+    KP01withCGInstance(int n, int cap);
+    void setInstance(string filename);
     void setWeight(int index, int weight);
     void setProfit(int index, int profit);
     int getWeight(int index) const;
@@ -33,6 +34,7 @@ public:
     int getCapacity() const;
     void addConflict(int item1, int item2);
     void removeConflict(int item1, int item2);
+   
     
 
 };

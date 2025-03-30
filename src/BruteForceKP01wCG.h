@@ -8,6 +8,7 @@
 class BruteForceKP01wCG {
 private:
 
+
 public:
     BruteForceKP01wCG();
     Solution solve(const KP01withCGInstance& instance);
