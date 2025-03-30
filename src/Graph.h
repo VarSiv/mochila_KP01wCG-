@@ -7,7 +7,7 @@ using std::tuple;
 using std::vector;
 
 class Graph{
-
+//clase grafo
 private:
     int _n;
     //bool to save memory
