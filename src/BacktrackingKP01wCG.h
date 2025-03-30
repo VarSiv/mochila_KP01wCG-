@@ -10,14 +10,14 @@ private:
 int sumatoria(int k, KP01withCGInstance instance){
     int res=0;
     for(int i=k;i<instance.getNumItems();i++){
-        res+=getProfit(instance[i]);
+        res+=instance.getProfit(i);
     }
     return res;
 }
 
 public:
     BacktrackingKP01wCG();
-    Solution solve(const KP01withCGInstance& instance);
+    Solution solve(const KP01withCGInstance& instance, int k);
 };
 
 #endif // BACKTRACKINGKP01_H

@@ -24,6 +24,7 @@ private:
     
 
 public:
+    KP01withCGInstance();
     KP01withCGInstance(int n, int cap);
     void setInstance(string filename);
     void setWeight(int index, int weight);
