@@ -1,5 +1,5 @@
 #include "Graph.h"
-
+//clase grafo 
 
 Graph::Graph(unsigned int n) {
 
