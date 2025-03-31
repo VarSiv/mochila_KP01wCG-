@@ -107,8 +107,3 @@ void KP01withCGInstance::removeConflict(int item1, int item2) {
 }
 
 
-int main() {
-    KP01withCGInstance instance(0,0);
-    instance.setInstance("instances/test_instance.in");
-    return 0;
-}
