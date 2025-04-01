@@ -8,6 +8,7 @@
 class BruteForceKP01wCG {
 private:
 
+    void solveAux(const KP01withCGInstance& mochila, int k, Solution& B, Solution S);
 
 public:
     BruteForceKP01wCG();

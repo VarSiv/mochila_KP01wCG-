@@ -23,7 +23,7 @@ public:
     int totalProfit();
     int totalWeight();
     vector<bool> getItemsVector();
-    bool isConflictingItems();
+    bool isValidItems();
     void printSolution() const;
     // Pueden agregar los metodos que consideren necesarios.
 };

@@ -9,6 +9,7 @@ Solution::Solution(int numItems) {
 }
 void Solution::setMochila(KP01withCGInstance mochila){
     _num_items = mochila.getNumItems();
+    _items_vector=vector<bool>(_num_items, false);
     _mochila = mochila;
 }
 void Solution::addItem(int item) {
@@ -48,7 +49,7 @@ int Solution::totalWeight(){
 vector<bool> Solution::getItemsVector(){
     return _items_vector;
 }
-bool Solution::isConflictingItems(){
+bool Solution::isValidItems(){
     for (int i=0; i<_num_items; i++){
         for (int j=0; j<_num_items; j++){
             if (_items_vector[i] && _items_vector[j] && _mochila.isConflicting(i, j)){
@@ -63,15 +64,15 @@ void Solution::printSolution() const {
         cout<<i<<": "<< _items_vector[i]<<" "<< endl;
  }
 }
-int main(){
-    KP01withCGInstance instance(0,0);
-    instance.setInstance("instances/test_instance.in");
-    Solution sol(2);
-    sol.setMochila(instance);
-    sol.addItem(2);
-    cout<<sol.totalProfit()<<" "<<sol.totalWeight()<<" "<<sol.isConflictingItems()<<"\n";
-    sol.printSolution();
-    sol.addItem(4);
-    cout<<sol.totalProfit()<<" "<<sol.totalWeight()<<" "<<sol.isConflictingItems()<<"\n";
-    sol.printSolution();
-}
+// int main(){
+//     KP01withCGInstance instance(0,0);
+//     instance.setInstance("instances/test_instance.in");
+//     Solution sol(2);
+//     sol.setMochila(instance);
+//     sol.addItem(2);
+//     cout<<sol.totalProfit()<<" "<<sol.totalWeight()<<" "<<sol.isConflictingItems()<<"\n";
+//     sol.printSolution();
+//     sol.addItem(4);
+//     cout<<sol.totalProfit()<<" "<<sol.totalWeight()<<" "<<sol.isConflictingItems()<<"\n";
+//     sol.printSolution();
+// }

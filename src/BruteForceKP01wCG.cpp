@@ -3,20 +3,39 @@
 
 BruteForceKP01wCG::BruteForceKP01wCG() {}
 
-
-Solution BruteForceKP01wCG::solve(const KP01withCGInstance& instance, int k) {
-    Solution b = bestSolution(instance.getNumItems());
-    Solution s;
-    
-    if(k ==instance.getNumItems()){
-        if(s.totalWeight()<=instance.getCapacity() && s.totalProfit()> b.totalProfit()){
-            b = s;
+void BruteForceKP01wCG::solveAux(const KP01withCGInstance& mochila, int k, Solution& B, Solution S){
+    int n = mochila.getNumItems();
+    if(k ==n){
+        if(S.totalWeight()<=mochila.getCapacity() && S.totalProfit()> B.totalProfit() && S.isValidItems()){
+            B=S;
         }
     } else{
-        s.addItem(k);
-        s=solve(instance, k+1);
-        s.removeItem(k);
-        s=solve(instance, k+1);
+        Solution S2 = S;
+        S2.addItem(k);
+        solveAux(mochila, k+1, B, S2);
+        S2.removeItem(k);
+        solveAux(mochila, k+1, B, S2);
     }
-    return bestSolution;
+}
+
+Solution BruteForceKP01wCG::solve(const KP01withCGInstance& instance) {
+
+    Solution ret(1);
+    ret.setMochila(instance);
+    solveAux(instance, 0, ret, ret);
+
+    return ret;
+
+}
+
+
+int main(){
+    KP01withCGInstance instance(0,0);
+    instance.setInstance("instances/test_instance_2.in");
+    BruteForceKP01wCG BF;
+    Solution sol = BF.solve(instance);
+    std::cout<<sol.totalProfit()<<"\n";
+    sol.printSolution();
+
+
 }
