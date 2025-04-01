@@ -17,6 +17,7 @@ private:
 public:
     Solution(int numItems); // Constructor to initialize size
     void setMochila(KP01withCGInstance mochila);
+    int numItems();
     void addItem(int item);
     void removeItem(int item);
     bool contains(int item) const;

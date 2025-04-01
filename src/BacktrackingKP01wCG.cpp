@@ -3,21 +3,46 @@
 
 BacktrackingKP01wCG::BacktrackingKP01wCG() {}
 
+int BacktrackingKP01wCG::maxProfit(Solution S, int k){
+    int n = S.numItems();
 
-Solution BacktrackingKP01wCG::solve(const KP01withCGInstance& instance, int k) {
-    //Solution solution(instance.getNumItems());
-    Solution b = bestSolution(instance.getNumItems());
-    Solution s;
-    
-    if(k ==instance.getNumItems()){
-        if(s.totalWeight()<=instance.getCapacity() && s.totalProfit()> b.totalProfit()){
-            b = s;
-        }
-    } else if(s.totalWeight()<=instance.getCapacity()&& s.totalProfit()+ sumatoria(k+1, instance)> b.totalProfit()){
-        s.addItem(k);
-        s=solve(instance, k+1);
-        s.removeItem(k);
-        s=solve(instance, k+1);
+    for (int i = k; i<n; i++){
+        S.addItem(i);
     }
-    return bestSolution;
+
+    return S.totalProfit();
+}
+
+void BacktrackingKP01wCG::solveAux(const KP01withCGInstance& mochila, int k, Solution& B, Solution S){
+    int n = mochila.getNumItems();
+    if(k ==n){
+        if(S.totalWeight()<=mochila.getCapacity() && S.totalProfit()> B.totalProfit() && S.isValidItems()){
+            B=S;
+        }
+    } 
+    else if(S.isValidItems() && S.totalWeight()<=mochila.getCapacity() && maxProfit(S, k)>B.totalProfit()){
+        Solution S2 = S;
+        S2.addItem(k);
+        solveAux(mochila, k+1, B, S2);
+        S2.removeItem(k);
+        solveAux(mochila, k+1, B, S2);
+    }
+}
+
+Solution BacktrackingKP01wCG::solve(const KP01withCGInstance& instance) {
+    Solution ret(1);
+    ret.setMochila(instance);
+    solveAux(instance, 0, ret, ret);
+
+    return ret;
+}
+int main(){
+    KP01withCGInstance instance(0,0);
+    instance.setInstance("instances/test_instance_2.in");
+    BacktrackingKP01wCG BT;
+    Solution sol = BT.solve(instance);
+    std::cout<<sol.totalProfit()<<"\n";
+    sol.printSolution();
+
+
 }

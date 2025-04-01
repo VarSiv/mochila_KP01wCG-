@@ -7,6 +7,9 @@ Solution::Solution(int numItems) {
     _mochila= KP01withCGInstance(numItems, 0);
 
 }
+int Solution::numItems(){
+    return _num_items;
+}
 void Solution::setMochila(KP01withCGInstance mochila){
     _num_items = mochila.getNumItems();
     _items_vector=vector<bool>(_num_items, false);

@@ -29,13 +29,13 @@ Solution BruteForceKP01wCG::solve(const KP01withCGInstance& instance) {
 }
 
 
-int main(){
-    KP01withCGInstance instance(0,0);
-    instance.setInstance("instances/test_instance_2.in");
-    BruteForceKP01wCG BF;
-    Solution sol = BF.solve(instance);
-    std::cout<<sol.totalProfit()<<"\n";
-    sol.printSolution();
+// int main(){
+//     KP01withCGInstance instance(0,0);
+//     instance.setInstance("instances/test_instance_2.in");
+//     BruteForceKP01wCG BF;
+//     Solution sol = BF.solve(instance);
+//     std::cout<<sol.totalProfit()<<"\n";
+//     sol.printSolution();
 
 
-}
+// }

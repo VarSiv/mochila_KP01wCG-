@@ -7,17 +7,12 @@
 
 class BacktrackingKP01wCG {
 private:
-int sumatoria(int k, KP01withCGInstance instance){
-    int res=0;
-    for(int i=k;i<instance.getNumItems();i++){
-        res+=instance.getProfit(i);
-    }
-    return res;
-}
+    void solveAux(const KP01withCGInstance& mochila, int k, Solution& B, Solution S);
+    int maxProfit(Solution S, int k);
 
 public:
     BacktrackingKP01wCG();
-    Solution solve(const KP01withCGInstance& instance, int k);
+    Solution solve(const KP01withCGInstance& instance);
 };
 
 #endif // BACKTRACKINGKP01_H
