@@ -19,8 +19,8 @@ void KP01withCGInstance::setInstance(string filename){
     instanceFile.open(filename);
 
     string fileLine;
-
     if (instanceFile.is_open()){
+        
         std::getline(instanceFile, fileLine);//gets number of items
         _num_items = std::stoi(fileLine);
         _conflicts = Graph(_num_items);
@@ -106,4 +106,6 @@ void KP01withCGInstance::removeConflict(int item1, int item2) {
     _conflicts.removeEdge(item1, item2);
 }
 
-
+bool KP01withCGInstance::isConflicting(int item1, int item2){
+    return _conflicts.isAdjacent(item1, item2);
+}

@@ -35,6 +35,7 @@ public:
     int getCapacity() const;
     void addConflict(int item1, int item2);
     void removeConflict(int item1, int item2);
+    bool isConflicting(int item1, int item2);
    
     
 

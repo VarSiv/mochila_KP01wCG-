@@ -16,12 +16,14 @@ private:
 
 public:
     Solution(int numItems); // Constructor to initialize size
+    void setMochila(KP01withCGInstance mochila);
     void addItem(int item);
     void removeItem(int item);
     bool contains(int item) const;
     int totalProfit();
     int totalWeight();
     vector<bool> getItemsVector();
+    bool isConflictingItems();
     void printSolution() const;
     // Pueden agregar los metodos que consideren necesarios.
 };
