@@ -6,6 +6,8 @@
 #include "KP01withCGInstance.h"
 
 class DynamicProgrammingKP01 {
+private:
+    void solveAux(const KP01withCGInstance& mochila, Solution& S, vector<vector<pair<int,Solution >>>& m);
 public:
     DynamicProgrammingKP01();
     Solution solve(const KP01withCGInstance& instance);

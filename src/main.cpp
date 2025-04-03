@@ -18,10 +18,10 @@ int main(int argc, char* argv[]) {
     std::string instance_name = argv[2];
 
     KP01withCGInstance instance(0,0);
+    instance.setInstance(instance_name);
 
-
-    std::cout << instance.getNumItems() << std::endl;
-    std::cout << instance.getCapacity() << std::endl;
+    std::cout <<"Num items: " <<instance.getNumItems() << std::endl;
+    std::cout <<"Max capacity: " <<instance.getCapacity() << std::endl;
 
     Solution solution(instance.getNumItems());
 
@@ -39,7 +39,10 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // Imprimir resultados sobre la solucion
+    cout<<"Profit obtained: "<<solution.totalProfit()<<std::endl;
+    cout<<"Weight used: "<<solution.totalWeight()<<std::endl;
+    solution.printSolution();
+    
 
 
     return 0;
