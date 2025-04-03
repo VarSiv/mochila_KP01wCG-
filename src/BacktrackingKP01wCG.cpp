@@ -36,13 +36,3 @@ Solution BacktrackingKP01wCG::solve(const KP01withCGInstance& instance) {
 
     return ret;
 }
-int main(){
-    KP01withCGInstance instance(0,0);
-    instance.setInstance("instances/test_instance_2.in");
-    BacktrackingKP01wCG BT;
-    Solution sol = BT.solve(instance);
-    std::cout<<sol.totalProfit()<<"\n";
-    sol.printSolution();
-
-
-}
