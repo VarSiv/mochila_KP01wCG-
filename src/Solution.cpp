@@ -67,15 +67,3 @@ void Solution::printSolution() const {
         cout<<i<<": "<< _items_vector[i]<<" "<< endl;
  }
 }
-// int main(){
-//     KP01withCGInstance instance(0,0);
-//     instance.setInstance("instances/test_instance.in");
-//     Solution sol(2);
-//     sol.setMochila(instance);
-//     sol.addItem(2);
-//     cout<<sol.totalProfit()<<" "<<sol.totalWeight()<<" "<<sol.isConflictingItems()<<"\n";
-//     sol.printSolution();
-//     sol.addItem(4);
-//     cout<<sol.totalProfit()<<" "<<sol.totalWeight()<<" "<<sol.isConflictingItems()<<"\n";
-//     sol.printSolution();
-// }
