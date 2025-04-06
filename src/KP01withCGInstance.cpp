@@ -9,7 +9,6 @@ KP01withCGInstance::KP01withCGInstance(int n, int cap): _num_items(n), _maxCapac
     _profits=vector<int>(n);
 }
 void KP01withCGInstance::setInstance(string filename){
-    std::cout<<filename<<"\n";
     _conflicts=Graph(0);
     _filename = filename;
     _weights = {};

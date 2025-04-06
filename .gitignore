@@ -1,5 +1,1 @@
-# Ignore all files without an extension
-[!./]*
-
-# Ignore object files
-*.o
+/build
