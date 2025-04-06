@@ -3,7 +3,7 @@ import subprocess
 import time
 import csv
 
-CSV_FILENAME = "cpp_bt_results.csv"
+CSV_FILENAME = "cpp_bf_results.csv"
 
 def list_files_in_instances():
     instances_folder = "instances"
@@ -15,7 +15,7 @@ def list_files_in_instances():
     # Write CSV header
     with open(CSV_FILENAME, mode='w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(["NumItems", "TimeTaken(s)", "HasConflict"])
+        writer.writerow(["NumItems", "TimeTaken(s)", "InstancePath"])
 
     for root, _, files in os.walk(instances_folder):
         for file in files:
@@ -32,7 +32,8 @@ def get_num_items_from_file(path):
         return "Unknown"
 
 def execute_knapsack_solver(instance_path):
-    command = ["build/knapsack_solver", "bt", instance_path]
+    #solving algorithm here
+    command = ["build/knapsack_solver", "bf", instance_path]
     has_conflict = "no_conflict" not in os.path.basename(instance_path)
     num_items = get_num_items_from_file(instance_path)
     print(f"Executing {instance_path}")
@@ -45,13 +46,13 @@ def execute_knapsack_solver(instance_path):
 
         with open(CSV_FILENAME, mode='a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([num_items, f"{elapsed_time:.2f}", has_conflict])
+            writer.writerow([num_items, f"{elapsed_time:.2f}", instance_path])
 
     except subprocess.TimeoutExpired:
         print(f"{instance_path}: DNF (Did Not Finish)")
         with open(CSV_FILENAME, mode='a', newline='') as file:
             writer = csv.writer(file)
-            writer.writerow([num_items, "DNF", has_conflict])
+            writer.writerow([num_items, "DNF", instance_path])
 
 if __name__ == "__main__":
     list_files_in_instances()
