@@ -42,7 +42,7 @@ Solution DynamicProgrammingKP01::solve(const KP01withCGInstance& instance) {
 
 int main(){
     KP01withCGInstance instance(0,0);
-    instance.setInstance("instances/test_instance.in");
+    instance.setInstance("instances/costo_peso_correlaciona_n30_star.txt");
     DynamicProgrammingKP01 solver_dp;
     int numItems = instance.getNumItems();
     int maxCapacity = instance.getCapacity();
