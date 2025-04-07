@@ -5,63 +5,51 @@
 
 DynamicProgrammingKP01::DynamicProgrammingKP01() {}
 
-void DynamicProgrammingKP01::solveAux( KP01withCGInstance mochila, Solution& S, vector<vector<int>>& m){
-    for(int i=0; i<= mochila.getNumItems(); i++){
-        m[i][0]=0;
+int DynamicProgrammingKP01::solveAux( KP01withCGInstance mochila, vector<vector<int>>& memo, int k, int capacity){
+    if (k==0 || capacity==0){
+        memo[k][capacity] = 0;
+        return 0;
     }
-    for(int c=0; c<= mochila.getCapacity(); c++){
-        m[0][c]=0;
-    }
-    for(int k=1; k<= mochila.getNumItems(); k++){
-        for(int c=1; c<= mochila.getCapacity(); c++){
-            if(mochila.getWeight(k-1)> c){//solo puedo considerar no agregarlo
-                m[k][c]=m[k-1][c];
-            }else{
-                obtainSolution(mochila, S, m);
-                if( m[k-1][c] < mochila.getProfit(k-1) + m[k-1][c-mochila.getWeight(k-1)] && S.isValidItems()){
-                    m[k][c]=mochila.getProfit(k-1)+m[k-1][c-mochila.getWeight(k-1)];
-                }else{
-                    m[k][c]=m[k-1][c];
-                }
+    else{
+        if (memo[k][capacity]!=-1){
+            return memo[k][capacity];
+        }
+        else{
+            int vWithout = solveAux(mochila, memo, k-1, capacity);
+
+            int vWith = -1;
+            if (mochila.getWeight(k)<=capacity){
+                vWith = mochila.getProfit(k) + solveAux(mochila, memo, k-1, capacity-mochila.getWeight(k));
             }
+            memo[k][capacity] = vWithout>vWith ? vWithout : vWith;
+            return memo[k][capacity];
         }
     }
 }
 
-
-void DynamicProgrammingKP01::obtainSolution(KP01withCGInstance mochila, Solution& S, vector<vector<int>> m){
-    int c=m[0].size()-1;
-    int k=m.size()-1;
-    while(k>0){
-        S.addItem(k-1);
-        if(c-mochila.getWeight(k-1)>=0 && m[k-1][c] < mochila.getProfit(k-1)+m[k-1][c-mochila.getWeight(k-1)] && S.isValidItems()){
-            c=c-mochila.getWeight(k-1);
-        }else{
-            S.removeItem(k-1);
-        }
-        k--;
-    }
-}
     
 Solution DynamicProgrammingKP01::solve(const KP01withCGInstance& instance) {
     Solution ret(1);
     ret.setMochila(instance);
-    vector<vector<int>> v= vector<vector<int>>(instance.getNumItems()+1, vector<int>(instance.getCapacity()+1, 0 ));
-    solveAux(instance, ret, v);
+    int numItems = instance.getNumItems();
+    int maxCapacity = instance.getCapacity();
+    vector<vector<int>> memo= vector<vector<int>>(numItems+1, vector<int>(maxCapacity+1, -1 ));
+    solveAux(instance,memo, numItems, maxCapacity);
     return ret;
+
 }
+
 
 int main(){
     KP01withCGInstance instance(0,0);
-    instance.setInstance("instances/mochila_chica_n10_no_conflict.txt");
-    DynamicProgrammingKP01 BT;
-    Solution sol = BT.solve(instance);
-    std::cout<<sol.totalProfit()<<"\n";
-    sol.printSolution();
-
+    instance.setInstance("instances/test_instance.in");
+    DynamicProgrammingKP01 solver_dp;
+    int numItems = instance.getNumItems();
+    int maxCapacity = instance.getCapacity();
+    vector<vector<int>> memo= vector<vector<int>>(numItems+1, vector<int>(maxCapacity+1, -1 ));
+    int ret = solver_dp.solveAux(instance, memo, numItems, maxCapacity);
+    cout<<ret<<"\n";
 }
-   
-
 
 
 
