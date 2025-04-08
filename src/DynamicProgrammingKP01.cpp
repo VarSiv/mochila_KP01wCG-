@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 
+
+
 DynamicProgrammingKP01::DynamicProgrammingKP01() {}
 
 int DynamicProgrammingKP01::solveAux(const KP01withCGInstance& mochila, vector<vector<int>>& memo, int k, int capacity){
@@ -26,30 +28,28 @@ int DynamicProgrammingKP01::solveAux(const KP01withCGInstance& mochila, vector<v
         }
     }
 }
-void DynamicProgrammingKP01::obtainSolution(const KP01withCGInstance& mochila, Solution& S, vector<vector<int>>& memo ){
 
-    S.setMochila(mochila);
-    int numItems = mochila.getNumItems();
-    int cap = mochila.getCapacity();
-    for (int k = numItems; k>0; k--){
-        if (memo[k][cap] == memo[k-1][cap]){
-            S.removeItem(k);
+void DynamicProgrammingKP01::obtainSolution(const KP01withCGInstance &mochila, Solution &S, vector<vector<int>> &memo){
+    int c=mochila.getCapacity();
+    int k=mochila.getNumItems();
+    while(k>0){
+        S.addItem(k-1);
+        if(c-mochila.getWeight(k-1)>=0 && memo[k-1][c] < mochila.getProfit(k-1)+memo[k-1][c-mochila.getWeight(k-1)]){
+            c=c-mochila.getWeight(k-1);
+        }else{
+            S.removeItem(k-1);
         }
-        else{
-            S.addItem(k);
-            cap -= mochila.getWeight(k);
-        }
+        k--;
     }
-}
-    
+}   
 Solution DynamicProgrammingKP01::solve(const KP01withCGInstance& instance) {
     Solution ret(1);
     ret.setMochila(instance);
     int numItems = instance.getNumItems();
     int maxCapacity = instance.getCapacity();
-
     vector<vector<int>> memo= vector<vector<int>>(numItems+1, vector<int>(maxCapacity+1, -1 ));
     solveAux(instance,memo, numItems, maxCapacity);
+    obtainSolution(instance, ret, memo);
     return ret;
 
 }
