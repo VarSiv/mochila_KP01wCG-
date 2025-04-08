@@ -1,7 +1,9 @@
 from KP01withCGInstance import KP01withCGInstance
 from Solution import Solution
+import os
+
 #4
-cl
+class BacktrackingKP01wCG:
     def __init__(self):
         pass
 
@@ -65,4 +67,16 @@ def test_backtracking():
     print("Test passed successfully!")
 
 if __name__ == "__main__":
-    test_backtracking()
+    file_path = input("Enter the path to the instance file: ").strip()
+    if not os.path.exists(file_path):
+        print(f"Error: File '{file_path}' does not exist.")
+        exit(1)
+    instance = KP01withCGInstance(0, 0)
+    instance.set_instance(file_path)
+
+    bt_solver = BacktrackingKP01wCG()
+    solution = bt_solver.solve(instance)
+    print("Weight used: ", solution.total_weight())
+    print("Profit obtained: ", solution.total_profit())
+
+    solution.print_solution()
