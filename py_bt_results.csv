@@ -27,3 +27,17 @@ NumItems,TimeTaken(s),InstancePath
 50,0.15,instances/mochila_apretada_n50_no_conflict.txt
 22,4.19,instances/costo_peso_correlaciona_n22_star.txt
 40,2.73,instances/costo_peso_correlaciona_n40_cycle.txt
+34,DNF,instances/costo_peso_correlaciona_n34_star.txt
+38,4.32,instances/costo_peso_correlaciona_n38_cycle.txt
+34,1.22,instances/costo_peso_correlaciona_n34_cycle.txt
+10,0.13,instances/test_instance_2.in
+36,4.65,instances/costo_peso_correlaciona_n36_cycle.txt
+5,0.09,instances/test_instance.in
+50,DNF,instances/mochila_chica_n50_no_conflict.txt
+24,22.16,instances/costo_peso_correlaciona_n24_star.txt
+22,0.16,instances/costo_peso_correlaciona_n22_cycle.txt
+20,0.11,instances/costo_peso_correlaciona_n20_cycle.txt
+80,DNF,instances/mochila_chica_n80_no_conflict.txt
+32,DNF,instances/costo_peso_correlaciona_n32_star.txt
+38,DNF,instances/costo_peso_correlaciona_n38_star.txt
+26,18.33,instances/costo_peso_correlaciona_n26_star.txt
