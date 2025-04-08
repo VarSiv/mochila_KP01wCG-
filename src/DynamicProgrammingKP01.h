@@ -8,11 +8,11 @@
 class DynamicProgrammingKP01 {
 private:
    
-    void obtainSolution(KP01withCGInstance mochila, Solution& S, vector<vector<int>> m);
+    void obtainSolution(const KP01withCGInstance& mochila, Solution& S, vector<vector<int>>& memo);
 public:
     DynamicProgrammingKP01();
     Solution solve(const KP01withCGInstance& instance);
-    int solveAux( KP01withCGInstance mochila, vector<vector<int>>& m, int k, int capacity);
+    int solveAux(const KP01withCGInstance& mochila, vector<vector<int>>& m, int k, int capacity);
 };
 
 #endif // DYNAMICPROGRAMMINGKP01_H
