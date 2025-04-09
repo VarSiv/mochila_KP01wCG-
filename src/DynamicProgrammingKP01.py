@@ -72,4 +72,16 @@ def test_dynamicP():
     print("Test passed successfully!")
 
 if __name__ == "__main__":
-    test_dynamicP()
+    file_path = input("Enter the path to the instance file: ").strip()
+    if not os.path.exists(file_path):
+        print(f"Error: File '{file_path}' does not exist.")
+        exit(1)
+    instance = KP01withCGInstance(0, 0)
+    instance.set_instance(file_path)
+
+    bt_solver = DynamicProgrammingKP01()
+    solution = bt_solver.solve(instance)
+    print("Weight used: ", solution.total_weight())
+    print("Profit obtained: ", solution.total_profit())
+
+    solution.print_solution()

@@ -1,10 +1,17 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
+
+# Get the directory of the current script (graph_constructors/)
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+# Path to the csv_data folder relative to the script
+CSV_DIR = SCRIPT_DIR.parent / 'csv_data'
 
 # Load CSV files
-bf_df = pd.read_csv('cpp_bf_results.csv')
-bt_df = pd.read_csv('cpp_bt_results.csv')
+bf_df = pd.read_csv(CSV_DIR / "cpp_bf_results.csv")
+bt_df = pd.read_csv(CSV_DIR / "cpp_bt_results.csv")
 
 # Remove DNF entries and convert TimeTaken(s) to float
 bf_df = bf_df[bf_df['TimeTaken(s)'] != 'DNF'].copy()
@@ -53,6 +60,9 @@ plt.legend()
 # Make grid go behind the data points
 plt.grid(True, which="both", ls="--", linewidth=0.5, zorder=0)
 
+IMG_DIR = SCRIPT_DIR.parent / 'graph_images'
+IMG_DIR.mkdir(exist_ok=True)  # Create it if it doesn't exist
+
 plt.tight_layout()
-plt.savefig('cpp_bt_cpp_bf_times_graph.png', dpi=300)
+plt.savefig(IMG_DIR/'cpp_bt_cpp_bf_times_graph.png', dpi=300)
 plt.show()

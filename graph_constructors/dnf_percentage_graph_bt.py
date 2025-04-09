@@ -1,6 +1,12 @@
 import csv
 import matplotlib.pyplot as plt
+from pathlib import Path
 
+# Get the directory of the current script (graph_constructors/)
+SCRIPT_DIR = Path(__file__).resolve().parent
+
+# Path to the csv_data folder relative to the script
+CSV_DIR = SCRIPT_DIR.parent / 'csv_data'
 def calculate_finished_percentage(file_path):
     with open(file_path, newline='') as csvfile:
         reader = csv.reader(csvfile)
@@ -12,9 +18,9 @@ def calculate_finished_percentage(file_path):
 
 # File names and labels
 files = {
-    "cpp_bf_results.csv": "C++ Brute Force",
-    "cpp_bt_results.csv": "C++ Backtracking",
-    "py_bt_results.csv": "Python Backtracking"
+    CSV_DIR / "cpp_bf_results.csv": "C++ Brute Force",
+    CSV_DIR / "cpp_bt_results.csv": "C++ Backtracking",
+    CSV_DIR / "py_bt_results.csv": "Python Backtracking",
 }
 
 # Calculate percentages
@@ -28,7 +34,7 @@ for filename, label in files.items():
 
 # Plotting
 plt.figure(figsize=(8, 5))
-bars = plt.bar(labels, percentages, color=['skyblue', 'lightgreen', 'salmon'])
+bars = plt.bar(labels, percentages, color=['skyblue', 'lightgreen', 'plum'])
 
 # Add percentage labels on top of bars
 for bar, percentage in zip(bars, percentages):
@@ -40,7 +46,7 @@ plt.title('Percentage of Finished Runs by Method')
 plt.ylim(0, 100)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
-
+IMG_DIR = SCRIPT_DIR.parent / 'graph_images'
 # Save plot
-plt.savefig("all_instance_finish_percentages.png")
+plt.savefig(IMG_DIR/"all_instance_finish_percentages.png")
 plt.close()
