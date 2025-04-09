@@ -41,8 +41,8 @@ for bar, percentage in zip(bars, percentages):
     yval = bar.get_height()
     plt.text(bar.get_x() + bar.get_width()/2, yval + 1, f'{percentage:.1f}%', ha='center', va='bottom')
 
-plt.ylabel('Percentage of Finished Runs (%)')
-plt.title('Percentage of Finished Runs by Method')
+plt.ylabel('Porcentaje de instancias terminadas (%)')
+plt.title('Porcentaje de todas las instancias terminadas')
 plt.ylim(0, 100)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()

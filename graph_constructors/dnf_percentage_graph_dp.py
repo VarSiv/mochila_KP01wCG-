@@ -21,19 +21,19 @@ def calculate_finished_percentage(file_path):
 
 # File names and labels
 files = {
-    CSV_DIR / "cpp_bf_results.csv": "C++ Brute Force",
-    CSV_DIR / "cpp_bt_results.csv": "C++ Backtracking",
-    CSV_DIR / "py_bt_results.csv": "Python Backtracking",
-    CSV_DIR / "cpp_dp_results.csv": "C++ Dynamic Programming",
-    CSV_DIR / "py_dp_results.csv": "Python Dynamic Programming"
+    CSV_DIR / "cpp_bf_results.csv": "C++ BF",
+    CSV_DIR / "cpp_bt_results.csv": "C++ BT",
+    CSV_DIR / "py_bt_results.csv": "Python BT",
+    CSV_DIR / "cpp_dp_results.csv": "C++ DP",
+    CSV_DIR / "py_dp_results.csv": "Python DP"
 }
 # Assign group-based colors
 color_map = {
-    "C++ Brute Force": "skyblue",
-    "C++ Backtracking": "lightgreen",
-    "Python Backtracking": "lightgreen",
-    "C++ Dynamic Programming": "plum",
-    "Python Dynamic Programming": "plum"
+    "C++ BF": "skyblue",
+    "C++ BT": "lightgreen",
+    "Python BT": "lightgreen",
+    "C++ DP": "plum",
+    "Python DP": "plum"
 }
 
 # Calculate percentages
@@ -56,8 +56,8 @@ for bar, percentage in zip(bars, percentages):
     yval = bar.get_height()
     plt.text(bar.get_x() + bar.get_width()/2, yval + 1, f'{percentage:.1f}%', ha='center', va='bottom')
 
-plt.ylabel('Percentage of Finished Runs (%)')
-plt.title('Percentage of Finished Runs by Method (No Conflict Instances Only)')
+plt.ylabel('Porcentaje de instancias terminadas (%)')
+plt.title('Porcentaje de las instancias sin conflictos terminadas')
 plt.ylim(0, 115)  # Give some space above 100%
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()

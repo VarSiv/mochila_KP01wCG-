@@ -58,7 +58,7 @@ plt.xticks(range(min_n, max_n + 1, 10))
 
 plt.xlabel('NumItems (n)')
 plt.ylabel('Tiempo promedio de ejecucion (s) [Escala Log]')
-plt.title('Tiempos promedio por estructura')
+plt.title('Tiempos promedio por estructura C++ BT')
 plt.legend()
 
 plt.grid(True, which="both", ls="--", linewidth=0.5, zorder=0)
