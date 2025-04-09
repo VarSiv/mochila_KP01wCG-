@@ -5,13 +5,13 @@
 #include "Graph.h"
 #include <gtest/gtest.h>
 
-// Test del constructor y del método getN
+// Test 1: funcionamiento del constructor y del método getN
 TEST(GraphTest, Constructor) {
     Graph graph(5);
     EXPECT_EQ(graph.getN(), 5);
 }
 
-// Test para agregar y verificar aristas
+// Test 2: Agregar y verificar adyacencia de aristas
 TEST(GraphTest, AddEdge) {
     Graph graph(4);
     graph.addEdge(0, 1);
@@ -19,7 +19,7 @@ TEST(GraphTest, AddEdge) {
     EXPECT_TRUE(graph.isAdjacent(1, 0));
 }
 
-// Test para eliminar aristas
+// Test 3: Eliminar aristas y verificar que ya no son adyacentes
 TEST(GraphTest, RemoveEdge) {
     Graph graph(4);
     graph.addEdge(0, 1);
@@ -28,13 +28,13 @@ TEST(GraphTest, RemoveEdge) {
     EXPECT_FALSE(graph.isAdjacent(1, 0));
 }
 
-// Test para evitar aristas de un nodo a sí mismo
+// Test 4: Evitar aristas de un nodo hacia sí mismo
 TEST(GraphTest, SelfLoop) {
     Graph graph(3);
     EXPECT_THROW(graph.addEdge(0, 0), std::invalid_argument);
 }
 
-// Test para agregar múltiples aristas
+// Test 5: Agregar múltiples aristas y verificar su adyacencia
 TEST(GraphTest, MultipleEdges) {
     Graph graph(5);
     graph.addEdge(0, 1);
@@ -46,7 +46,7 @@ TEST(GraphTest, MultipleEdges) {
     EXPECT_FALSE(graph.isAdjacent(0, 4));
 }
 
-// Test para eliminar una arista que no existe
+// Test 6: Eliminar una arista que no existe
 TEST(GraphTest, RemoveNonExistingEdge) {
     Graph graph(4);
     EXPECT_NO_THROW(graph.removeEdge(1, 2));

@@ -5,13 +5,17 @@ import os
 #4
 class BacktrackingKP01wCG:
     def __init__(self):
+        # Constructor vacío
         pass
 
     def max_profit(self, S: Solution, k: int, mochila: KP01withCGInstance) -> int:
+        # Calcula el beneficio maximo que se puede obtener a partir de una solucion parcial y los items que faltan 
         n = S.num_items()
         S2 = Solution(n)
         S2.set_mochila(mochila)
         S2._items_vector = S.get_items_vector().copy()
+
+        # El beneficio maximo (sin tener en cuenta la factibilidad) implica agregar todos los items a partir de k por lo que los agregamos y vemos el beneficio final
         for i in range(k, n):
             S2.add_item(i)
         return S2.total_profit()
@@ -20,28 +24,33 @@ class BacktrackingKP01wCG:
         n = mochila.get_num_items()
         
         if k == n:
+            # Caso base: ya vimos todos los ítems
             if (S.total_weight() <= mochila.get_capacity() and
                 S.total_profit() > B.total_profit() and
                 S.is_valid_items()):
+                # Si S es mejor solución y válida, la guardamos como la mejor hasta ahora                
                 B.set_mochila(mochila)
                 B._items_vector = S.get_items_vector().copy()
         
+        # Vemos si todavía vale la pena seguir teniendo en cuenta el beneficio potencial de ese sub arbol (poda por factibilidad y optimalidad)
         elif (S.is_valid_items() and S.total_weight() <= mochila.get_capacity() and
             self.max_profit(S, k, mochila) > B.total_profit()):
             S2 = Solution(n)
             S2.set_mochila(mochila)
             S2._items_vector = S.get_items_vector().copy()
             
-            S2.add_item(k)
+            # Agregamos al item k y evaluamos la solucion con este
+            S2.add_item(k) 
             self.solve_aux(mochila, k + 1, B, S2)
             
+            #Sacamos al item k y evaluamos la solucion sin este
             S2.remove_item(k)
             self.solve_aux(mochila, k + 1, B, S2)
 
     def solve(self, instance: KP01withCGInstance) -> Solution:
-        ret = Solution(1)
+        ret = Solution(1) # Inicializa solución vacía
         ret.set_mochila(instance)
-        self.solve_aux(instance, 0, ret, ret)
+        self.solve_aux(instance, 0, ret, ret) # Comienza el backtracking desde el ítem 0
         return ret
     
 def test_backtracking():

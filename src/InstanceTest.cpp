@@ -1,21 +1,21 @@
 #include "KP01withCGInstance.h"
 #include <gtest/gtest.h>
 
-// Test default constructor
+// Test 1: Constructor por defecto, la instancia debe estar vacía
 TEST(KP01withCGInstanceTest, DefaultConstructor) {
     KP01withCGInstance instance;
     EXPECT_EQ(instance.getNumItems(), 0);
     EXPECT_EQ(instance.getCapacity(), 0);
 }
 
-// Test parameterized constructor
+// Test 2: Constructor con parámetros, crea una instancia con ítems y capacidad definida
 TEST(KP01withCGInstanceTest, ParameterizedConstructor) {
     KP01withCGInstance instance(5, 50);
     EXPECT_EQ(instance.getNumItems(), 5);
     EXPECT_EQ(instance.getCapacity(), 50);
 }
 
-// Test setting and getting weight
+// Test 3: Asignar y devolver pesos correctamente
 TEST(KP01withCGInstanceTest, SetGetWeight) {
     KP01withCGInstance instance(5, 50);
     instance.setWeight(0, 10);
@@ -24,7 +24,7 @@ TEST(KP01withCGInstanceTest, SetGetWeight) {
     EXPECT_EQ(instance.getWeight(1), 20);
 }
 
-// Test setting and getting profit
+// Test 4: Asignar y devolver beneficios correctamente
 TEST(KP01withCGInstanceTest, SetGetProfit) {
     KP01withCGInstance instance(5, 50);
     instance.setProfit(0, 60);
@@ -33,7 +33,7 @@ TEST(KP01withCGInstanceTest, SetGetProfit) {
     EXPECT_EQ(instance.getProfit(1), 100);
 }
 
-// Test conflict management
+// Test 5: Manejo de conflictos entre ítems
 TEST(KP01withCGInstanceTest, ConflictManagement) {
     KP01withCGInstance instance(5, 50);
     instance.addConflict(0, 2);
@@ -46,7 +46,7 @@ TEST(KP01withCGInstanceTest, ConflictManagement) {
     EXPECT_FALSE(instance.isConflicting(1, 4));
 }
 
-//test reading from file
+// Test 6: Lectura de instancia desde archivo
 TEST(KP01withCGInstance, FileReading){
     KP01withCGInstance instance(0,0);
     instance.setInstance("instances/test_instance.in");

@@ -4,49 +4,63 @@ import os
 
 class DynamicProgrammingKP01:
     def __init__(self):
+        # Constructor por defecto
         pass
 
     def solve_aux(self, mochila, memo, k, capacity):
+
+        # Si no hay items ni capacidad nunca va a poder agregar items por lo que el beneficio va a ser 0
         if k == 0 or capacity == 0:
             memo[k][capacity] = 0
             return 0
+        
+        # Si ya visite ese item, devuelvo su beneficio
         if memo[k][capacity] != -1:
             return memo[k][capacity]
 
+        #No incluimos el item k-1
         v_without = self.solve_aux(mochila, memo, k - 1, capacity)
 
         v_with = -1
+        # Si podemos incluir el item k-1 lo agregamos y vemos el beneficio
         if mochila.get_weight(k - 1) <= capacity:
             v_with = mochila.get_profit(k - 1) + self.solve_aux(
                 mochila, memo, k - 1, capacity - mochila.get_weight(k - 1)
             )
 
+        # El beneficio seleccionado va a ser el maximo entre incluir o no el item
         memo[k][capacity] = max(v_without, v_with)
         return memo[k][capacity]
 
     def obtain_solution(self, mochila, S, memo):
+        # Reconstruye la solución óptima a partir de la tabla memo
         c = mochila.get_capacity()
         k = mochila.get_num_items()
         while k > 0:
-            S.add_item(k - 1)
+            S.add_item(k - 1) # Suponemos que el ítem k-1 está en la solución asi que lo agregamos
             if (
-                c - mochila.get_weight(k - 1) >= 0
+                c - mochila.get_weight(k - 1) >= 0 #Vemos si entra en la capacidad
                 and memo[k - 1][c]
-                < mochila.get_profit(k - 1)
+                < mochila.get_profit(k - 1)  # Vemos si agregarlo aumenta el beneficio total
                 + memo[k - 1][c - mochila.get_weight(k - 1)]
             ):
-                c = c - mochila.get_weight(k - 1)
-            else:
-                S.remove_item(k - 1)
+                c = c - mochila.get_weight(k - 1) # Si aumenta entonces el item k-1 pertenece a la solucion
+            else: 
+                S.remove_item(k - 1) # Si no aumenta el item k-1 no es parte de la solucion asi que lo sacamos
             k -= 1
 
     def solve(self, instance):
-        ret = Solution(1)
-        ret.set_mochila(instance)
+        ret = Solution(1) # Crea una solución vacía con 1 ítem por defecto
+        ret.set_mochila(instance) # Asocia la mochila a la solución
         num_items = instance.get_num_items()
         max_capacity = instance.get_capacity()
+
+         # Crea tabla de memoización inicializada con -1
         memo = [[-1 for _ in range(max_capacity + 1)] for _ in range(num_items + 1)]
+        
+        # Llena la tabla de memoización
         self.solve_aux(instance, memo, num_items, max_capacity)
+        # Reconstruye la solución óptima
         self.obtain_solution(instance, ret, memo)
         return ret
     
