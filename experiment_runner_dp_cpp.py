@@ -3,10 +3,8 @@ import subprocess
 import time
 import csv
 
-
 algo = "dp"
-
-CSV_FILENAME = "cpp_"+algo+"_results.csv"
+CSV_FILENAME = "cpp_" + algo + "_results.csv"
 
 def list_files_in_instances():
     instances_folder = "instances"
@@ -20,7 +18,6 @@ def list_files_in_instances():
         writer = csv.writer(file)
         writer.writerow(["NumItems", "TimeTaken(s)", "InstancePath"])
    
-
     for root, _, files in os.walk(instances_folder):
         for file in files:
             file_path = os.path.join(root, file)
@@ -36,9 +33,11 @@ def get_num_items_from_file(path):
         return "Unknown"
 
 def execute_knapsack_solver(instance_path):
-    #solving algorithm here
+    if "no_conflict" not in instance_path:
+        print(f"Skipping {instance_path} (no 'no_conflict' in path)")
+        return
+
     command = ["build/knapsack_solver", algo, instance_path]
-    has_conflict = "no_conflict" not in os.path.basename(instance_path)
     num_items = get_num_items_from_file(instance_path)
     print(f"Using: {algo}")
     print(f"Executing {instance_path}")
