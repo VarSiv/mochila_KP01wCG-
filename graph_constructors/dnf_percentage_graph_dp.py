@@ -2,10 +2,9 @@ import csv
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# Get the directory of the current script (graph_constructors/)
+# cosas de paths
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-# Path to the csv_data folder relative to the script
 CSV_DIR = SCRIPT_DIR.parent / 'csv_data'
 def calculate_finished_percentage(file_path):
     with open(file_path, newline='') as csvfile:
@@ -13,13 +12,13 @@ def calculate_finished_percentage(file_path):
         next(reader)  # Skip header
         rows = [
             row for row in reader 
-            if 'no_conflict' in row[2]  # Only include rows with 'no_conflict' in InstancePath
+            if 'no_conflict' in row[2]  # solo incluir cosos con no conflict
         ]
         total = len(rows)
         finished = sum(1 for row in rows if row[1] != 'DNF')
         return (finished / total) * 100 if total > 0 else 0
 
-# File names and labels
+
 files = {
     CSV_DIR / "cpp_bf_results.csv": "C++ BF",
     CSV_DIR / "cpp_bt_results.csv": "C++ BT",
@@ -27,7 +26,7 @@ files = {
     CSV_DIR / "cpp_dp_results.csv": "C++ DP",
     CSV_DIR / "py_dp_results.csv": "Python DP"
 }
-# Assign group-based colors
+
 color_map = {
     "C++ BF": "skyblue",
     "C++ BT": "lightgreen",
@@ -36,7 +35,7 @@ color_map = {
     "Python DP": "plum"
 }
 
-# Calculate percentages
+
 labels = []
 percentages = []
 colors = []
@@ -47,22 +46,22 @@ for filename, label in files.items():
     percentages.append(percent)
     colors.append(color_map[label])
 
-# Plotting
+
 plt.figure(figsize=(10, 6))
 bars = plt.bar(labels, percentages, color=colors)
 
-# Add percentage labels on top of bars
+# porcentajes sobre barrtas
 for bar, percentage in zip(bars, percentages):
     yval = bar.get_height()
     plt.text(bar.get_x() + bar.get_width()/2, yval + 1, f'{percentage:.1f}%', ha='center', va='bottom')
 
 plt.ylabel('Porcentaje de instancias terminadas (%)')
 plt.title('Porcentaje de las instancias sin conflictos terminadas')
-plt.ylim(0, 115)  # Give some space above 100%
+plt.ylim(0, 115)  # para q el 100% no llegue hasta el techo
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 plt.tight_layout()
 
 IMG_DIR = SCRIPT_DIR.parent / 'graph_images'
-# Save plot
+
 plt.savefig(IMG_DIR/"no_conflict_instance_finish_percentages.png")
 plt.close()
