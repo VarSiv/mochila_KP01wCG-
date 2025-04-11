@@ -70,9 +70,6 @@ Solution DynamicProgrammingKP01::solve(const KP01withCGInstance& instance) {
 
 }
 
-Solution ret(1);  
-ret.setMochila(instance); 
-solveAux(instance, 0, ret, ret); // Iniciamos la recursión desde el ítem 0
 
 
 /*

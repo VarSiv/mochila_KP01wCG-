@@ -49,3 +49,5 @@ public:
     void printSolution() const;
 
 };
+
+#endif
